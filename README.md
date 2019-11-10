@@ -78,7 +78,7 @@ bool ret = MysqlMisc::query(conn, sql, [](int ret, const string& desc, bool more
     bool enable;
     row->getBool("enable", enable);
     string dat;
-    row->getBool("dat", dat);
+    row->getBlob("dat", dat);
     ullong ver;
     row->getLong("ver", ver);
     ullong gts;
