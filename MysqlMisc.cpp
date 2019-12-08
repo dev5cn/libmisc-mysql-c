@@ -86,7 +86,9 @@ bool MysqlMisc::query(MYSQL* conn, const string& sql, function<bool(int ret, con
 		cb(ret, desc, false, 0, nullptr);
 		return false;
 	}
-	return MysqlMisc::takeResult(stmt, sql, cb);
+	bool r = MysqlMisc::takeResult(stmt, sql, cb);
+	::mysql_stmt_close(stmt);
+	return r;
 }
 
 bool MysqlMisc::query(MYSQL* conn, shared_ptr<MysqlCrudReq> req, function<bool(int ret, const string& desc, bool more, int rows, shared_ptr<MysqlResultRow> row)> cb)
